@@ -1,0 +1,21 @@
+class Solution {
+public:
+    
+    int solve(TreeNode* root, int &maxa){
+        if(root==NULL)
+            return 0;
+        int l = solve(root->left, maxa);
+        int r = solve(root->right, maxa);
+        
+        if(l+r>maxa)
+            maxa = l + r;
+        return 1 + max(l,r);
+    }
+    
+    int diameterOfBinaryTree(TreeNode* root) {
+        
+        int maxa = 0;
+        int x = solve(root,maxa);
+        return maxa;
+    }
+};
