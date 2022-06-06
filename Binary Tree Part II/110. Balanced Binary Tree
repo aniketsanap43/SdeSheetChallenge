@@ -1,0 +1,46 @@
+class Solution {
+public:
+    /*int solve1(TreeNode* root, bool &ans){
+        if(root==NULL) return 0;
+        
+        int l = solve1(root->left,ans);
+        int r = solve1(root->right, ans);
+        
+        if(!ans)
+            return -1;
+        
+        if(abs(l-r)>1){
+            ans = false;
+            return -1;
+        }
+            
+        return 1 + max(l,r);
+
+    }*/
+    
+    int solve(TreeNode* root, TreeNode* head){
+        if(root==NULL) return 0;
+        
+        int l = solve(root->left,head);
+        int r = solve(root->right, head);
+        
+        if(l==-1 || r==-1)
+            return -1;
+        if(abs(l-r)>1)
+            return -1;
+        if(root==head)
+            return 1;
+        return 1 + max(l,r);
+    }
+    
+    bool isBalanced(TreeNode* root) {
+        /*bool ans = true;
+        solve1(root,ans);
+        return ans;*/
+        
+        //below is the faster one
+        if(root==NULL) return true;
+        if(solve(root, root)==1) return true;
+        return false;
+    }
+};
